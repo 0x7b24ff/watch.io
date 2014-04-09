@@ -1,0 +1,34 @@
+{
+    "name": "watch.io",
+    "description": "An event wrapper for fs.watch(), with support for recursive directories",
+    "keywords": [
+        "watch.io", "fs", "watch", "recursive", "notify"
+    ],
+    "version": "1.0.0",
+    "author": "DJ-NotYet <dj.notyet@gmail.com>",
+    "contributors" : [],
+    "license": {
+        "type": "Apache License 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "main": "index.js",
+    "devDependencies": {
+        "mocha": "*",
+        "expect.js": "*",
+        "jshint": "*",
+        "fs-extra": "~0.8"
+    },
+    "scripts": {
+        "build": "make build",
+        "test": "make test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/DJ-NotYet/watch.io.git"
+    },
+    "bugs": {
+        "url":"https://github.com/DJ-NotYet/watch.io/issues/new",
+        "email": "dj.notyet@gmail.com"
+    },
+    "homepage": ""
+}

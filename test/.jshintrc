@@ -1,0 +1,23 @@
+{
+    "browser": false,
+    "node": false,
+    "bitwise": false,
+    "camelcase": false,
+    "curly": false,
+    "eqeqeq": false,
+    "forin": false,
+    "immed": false,
+    "latedef": false,
+    "newcap": false,
+    "noarg": false,
+    "noempty": false,
+    "nonew": false,
+    "plusplus": false,
+    "quotmark": false,
+    "strict": false,
+    "trailing": false,
+    "undef": false,
+    "unused": false,
+    "shadow": true,
+    "validthis": true
+}
