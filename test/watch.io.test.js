@@ -1,296 +1,312 @@
 // watch.io.test.js
 //
 
-var fs = require("fs-extra"),
-    path = require("path"),
-    expect = require("expect.js"),
-    WatchIO = require("../index");
+var FSX = require('fs-extra'),
+    Path = require('path'),
+    expect = require('expect.js'),
+    WatchIO = require('..')
+;
 
-var basePath = __dirname + "/testing/",
-    testPath1 = basePath + "test1/",
-    testPath2 = basePath + "test2/";
+var basePath = __dirname + '/testing/',
+    testPath1 = basePath + 'test1/',
+    testPath2 = basePath + 'test2/'
+;
 
 // TEST CASE: Watch.IO
-describe("Watch.IO", function () {
+describe('Watch.IO', function () {
 
     before(function () {
 
-        fs.removeSync(basePath);
-        fs.mkdirSync(basePath);
+        FSX.removeSync( basePath );
+        FSX.mkdirSync( basePath );
 
     });
 
-    describe("Test.1 watch on a folder in plain structure", function () {
+    describe('Test.1 watch on a folder in plain structure', function () {
 
         before(function () {
 
-            fs.mkdirSync(testPath1);
+            FSX.mkdirSync( testPath1 );
 
         });
 
-        it("listen for file creation", function (done) {
+        it('listen for file creation', function ( done ) {
 
-            var testFolder = testPath1 + "test.1",
-                testFile = testFolder + "/testfile",
+            var testFolder = testPath1 + 'test.1',
+                testFile = testFolder + '/testfile',
                 watcher = new WatchIO(),
-                count = 0;
+                count = 0
+            ;
 
-            fs.mkdirSync(testFolder);
-            watcher.watch(testFolder);
+            FSX.mkdirSync( testFolder );
+            watcher.watch( testFolder );
 
-            watcher.on("change", function (type, file, stat) {
-                expect(type).to.be.a("string");
-                expect(file).to.be.a("string");
-                expect(stat).to.be.a(fs.Stats);
+            watcher.on('change', function ( type, file, stat ) {
 
-                expect(type).to.be("create");
-                expect(file).to.be(testFile);
-                expect(stat.isDirectory()).to.be(false);
+                expect( type ).to.be.a('string');
+                expect( file ).to.be.a('string');
+                expect( stat ).to.be.a( FSX.Stats );
 
-                if (++count >= 2) {
+                expect( type ).to.be('create');
+                expect( file ).to.be( testFile );
+                expect( stat.isDirectory() ).to.be( false );
+
+                if ( ++count >= 2 ) {
                     watcher.removeAllListeners();
                     done();
                 }
+
             });
 
-            watcher.on("create", function (file, stat) {
-                expect(file).to.be.a("string");
-                expect(stat).to.be.a(fs.Stats);
+            watcher.on('create', function ( file, stat ) {
 
-                expect(file).to.be(testFile);
-                expect(stat.isDirectory()).to.be(false);
+                expect( file ).to.be.a('string');
+                expect( stat ).to.be.a( FSX.Stats );
 
-                if (++count >= 2) {
+                expect( file ).to.be( testFile );
+                expect( stat.isDirectory() ).to.be( false );
+
+                if ( ++count >= 2 ) {
                     watcher.removeAllListeners();
                     done();
                 }
+
             });
 
-            fs.writeFile(testFile, "abc");
+            FSX.writeFile( testFile, 'abc' );
 
         });
 
-        it("listen for file updating", function (done) {
+        it('listen for file updating', function ( done ) {
 
-            var testFolder = testPath1 + "test.2",
-                testFile = testFolder + "/testfile",
+            var testFolder = testPath1 + 'test.2',
+                testFile = testFolder + '/testfile',
                 watcher = new WatchIO(),
-                count = 0;
+                count = 0
+            ;
 
-            fs.mkdirSync(testFolder);
-            fs.writeFileSync(testFile, "abc");
-            watcher.watch(testFolder);
+            FSX.mkdirSync( testFolder );
+            FSX.writeFileSync( testFile, 'abc' );
+            watcher.watch( testFolder );
 
-            watcher.on("change", function (type, file, stat) {
-                expect(type).to.be.a("string");
-                expect(file).to.be.a("string");
-                expect(stat).to.be.a(fs.Stats);
+            watcher.on('change', function ( type, file, stat ) {
 
-                expect(type).to.be("update");
-                expect(file).to.be(testFile);
-                expect(stat.isDirectory()).to.be(false);
+                expect( type ).to.be.a('string');
+                expect( file ).to.be.a('string');
+                expect( stat ).to.be.a( FSX.Stats );
 
-                if (++count >= 2) {
+                expect( type ).to.be('update');
+                expect( file ).to.be( testFile );
+                expect( stat.isDirectory() ).to.be( false );
+
+                if ( ++count >= 2 ) {
                     watcher.removeAllListeners();
                     done();
                 }
+
             });
 
-            watcher.on("update", function (file, stat) {
-                expect(file).to.be.a("string");
-                expect(stat).to.be.a(fs.Stats);
+            watcher.on('update', function ( file, stat ) {
 
-                expect(file).to.be(testFile);
-                expect(stat.isDirectory()).to.be(false);
+                expect( file ).to.be.a('string');
+                expect( stat ).to.be.a( FSX.Stats );
 
-                if (++count >= 2) {
+                expect( file ).to.be( testFile );
+                expect( stat.isDirectory() ).to.be( false );
+
+                if ( ++count >= 2 ) {
                     watcher.removeAllListeners();
                     done();
                 }
+
             });
 
-            fs.writeFile(testFile, "abc");
+            FSX.writeFile( testFile, 'abc' );
 
         });
 
-        it("listen for file removal", function (done) {
+        it('listen for file removal', function ( done ) {
 
-            var testFolder = testPath1 + "test.3",
-                testFile = testFolder + "/testfile",
+            var testFolder = testPath1 + 'test.3',
+                testFile = testFolder + '/testfile',
                 watcher = new WatchIO(),
-                count = 0;
+                count = 0
+            ;
 
-            fs.mkdirSync(testFolder);
-            fs.writeFileSync(testFile, "abc");
-            watcher.watch(testFolder);
+            FSX.mkdirSync( testFolder );
+            FSX.writeFileSync( testFile, 'abc' );
+            watcher.watch( testFolder );
 
-            watcher.on("change", function (type, file, stat) {
-                expect(type).to.be.a("string");
-                expect(file).to.be.a("string");
-                expect(stat).to.be.a(fs.Stats);
+            watcher.on('change', function ( type, file, stat ) {
+                expect( type ).to.be.a('string');
+                expect( file ).to.be.a('string');
+                expect( stat ).to.be.a( FSX.Stats );
 
-                expect(type).to.be("remove");
-                expect(file).to.be(testFile);
-                expect(stat.isDirectory()).to.be(false);
+                expect( type ).to.be('remove');
+                expect( file ).to.be( testFile );
+                expect( stat.isDirectory() ).to.be( false );
 
-                if (++count >= 2) {
+                if ( ++count >= 2 ) {
                     watcher.removeAllListeners();
                     done();
                 }
             });
 
-            watcher.on("remove", function (file, stat) {
-                expect(file).to.be.a("string");
-                expect(stat).to.be.a(fs.Stats);
+            watcher.on('remove', function ( file, stat ) {
+                expect( file ).to.be.a('string');
+                expect( stat ).to.be.a( FSX.Stats );
 
-                expect(file).to.be(testFile);
-                expect(stat.isDirectory()).to.be(false);
+                expect( file ).to.be( testFile );
+                expect( stat.isDirectory() ).to.be(false);
 
-                if (++count >= 2) {
+                if ( ++count >= 2 ) {
                     watcher.removeAllListeners();
                     done();
                 }
             });
 
-            fs.unlink(testFile);
+            FSX.unlink( testFile );
 
         });
 
     });
 
-    describe("Test.2 watch a recursive folder-structure", function () {
+    describe('Test.2 watch a recursive folder-structure', function () {
 
         before(function () {
 
-            fs.mkdirSync(testPath2);
+            FSX.mkdirSync( testPath2 );
 
         });
 
-        it("listen for file creation", function (done) {
+        it('listen for file creation', function ( done ) {
 
-            var testFolder = testPath2 + "test.1",
-                testFile = testFolder + "/subfolder/testfile",
+            var testFolder = testPath2 + 'test.1',
+                testFile = testFolder + '/subfolder/testfile',
                 watcher = new WatchIO(),
-                count = 0;
+                count = 0
+            ;
 
-            fs.mkdirpSync(path.dirname(testFile));
-            watcher.watch(testFolder);
+            FSX.mkdirpSync( Path.dirname( testFile ));
+            watcher.watch( testFolder );
 
-            watcher.on("change", function (type, file, stat) {
-                expect(type).to.be.a("string");
-                expect(file).to.be.a("string");
-                expect(stat).to.be.a(fs.Stats);
+            watcher.on('change', function ( type, file, stat ) {
+                expect( type ).to.be.a('string');
+                expect( file ).to.be.a('string');
+                expect( stat ).to.be.a( FSX.Stats );
 
-                expect(type).to.be("create");
-                expect(file).to.be(testFile);
-                expect(stat.isDirectory()).to.be(false);
+                expect( type ).to.be('create');
+                expect( file ).to.be( testFile );
+                expect( stat.isDirectory() ).to.be( false );
 
-                if (++count >= 2) {
+                if ( ++count >= 2 ) {
                     watcher.removeAllListeners();
                     done();
                 }
             });
 
-            watcher.on("create", function (file, stat) {
-                expect(file).to.be.a("string");
-                expect(stat).to.be.a(fs.Stats);
+            watcher.on('create', function ( file, stat ) {
+                expect( file ).to.be.a('string');
+                expect( stat ).to.be.a( FSX.Stats );
 
-                expect(file).to.be(testFile);
-                expect(stat.isDirectory()).to.be(false);
+                expect( file ).to.be( testFile );
+                expect( stat.isDirectory() ).to.be( false );
 
-                if (++count >= 2) {
+                if ( ++count >= 2 ) {
                     watcher.removeAllListeners();
                     done();
                 }
             });
 
-            fs.writeFile(testFile, "abc");
+            FSX.writeFile( testFile, 'abc' );
 
         });
 
-        it("listen for file updating", function (done) {
+        it('listen for file updating', function ( done ) {
 
-            var testFolder = testPath2 + "test.2",
-                testFile = testFolder + "/subfolder/testfile",
+            var testFolder = testPath2 + 'test.2',
+                testFile = testFolder + '/subfolder/testfile',
                 watcher = new WatchIO(),
-                count = 0;
+                count = 0
+            ;
 
-            fs.mkdirpSync(path.dirname(testFile));
-            fs.writeFileSync(testFile, "abc");
-            watcher.watch(testFolder);
+            FSX.mkdirpSync( Path.dirname( testFile ));
+            FSX.writeFileSync( testFile, 'abc' );
+            watcher.watch( testFolder );
 
-            watcher.on("change", function (type, file, stat) {
-                expect(type).to.be.a("string");
-                expect(file).to.be.a("string");
-                expect(stat).to.be.a(fs.Stats);
+            watcher.on('change', function ( type, file, stat ) {
+                expect( type ).to.be.a('string');
+                expect( file ).to.be.a('string');
+                expect( stat ).to.be.a( FSX.Stats );
 
-                expect(type).to.be("update");
-                expect(file).to.be(testFile);
-                expect(stat.isDirectory()).to.be(false);
+                expect( type ).to.be('update');
+                expect( file ).to.be( testFile );
+                expect( stat.isDirectory() ).to.be( false );
 
-                if (++count >= 2) {
+                if ( ++count >= 2 ) {
                     watcher.removeAllListeners();
                     done();
                 }
             });
 
-            watcher.on("update", function (file, stat) {
-                expect(file).to.be.a("string");
-                expect(stat).to.be.a(fs.Stats);
+            watcher.on('update', function ( file, stat ) {
+                expect( file ).to.be.a('string');
+                expect( stat ).to.be.a( FSX.Stats );
 
-                expect(file).to.be(testFile);
-                expect(stat.isDirectory()).to.be(false);
+                expect( file ).to.be( testFile );
+                expect( stat.isDirectory() ).to.be( false );
 
-                if (++count >= 2) {
+                if ( ++count >= 2 ) {
                     watcher.removeAllListeners();
                     done();
                 }
             });
 
-            fs.writeFile(testFile, "abc");
+            FSX.writeFile( testFile, 'abc' );
 
         });
 
-        it("listen for file removal", function (done) {
+        it('listen for file removal', function ( done ) {
 
-            var testFolder = testPath2 + "test.3",
-                testFile = testFolder + "/subfolder/testfile",
+            var testFolder = testPath2 + 'test.3',
+                testFile = testFolder + '/subfolder/testfile',
                 watcher = new WatchIO(),
-                count = 0;
+                count = 0
+            ;
 
-            fs.mkdirpSync(path.dirname(testFile));
-            fs.writeFileSync(testFile, "abc");
-            watcher.watch(testFolder);
+            FSX.mkdirpSync( Path.dirname( testFile ));
+            FSX.writeFileSync( testFile, 'abc' );
+            watcher.watch( testFolder );
 
-            watcher.on("change", function (type, file, stat) {
-                expect(type).to.be.a("string");
-                expect(file).to.be.a("string");
-                expect(stat).to.be.a(fs.Stats);
+            watcher.on('change', function ( type, file, stat ) {
+                expect( type ).to.be.a('string');
+                expect( file ).to.be.a('string');
+                expect( stat ).to.be.a( FSX.Stats );
 
-                expect(type).to.be("remove");
-                expect(file).to.be(testFile);
-                expect(stat.isDirectory()).to.be(false);
+                expect( type ).to.be('remove');
+                expect( file ).to.be( testFile );
+                expect( stat.isDirectory() ).to.be( false );
 
-                if (++count >= 2) {
+                if ( ++count >= 2 ) {
                     watcher.removeAllListeners();
                     done();
                 }
             });
 
-            watcher.on("remove", function (file, stat) {
-                expect(file).to.be.a("string");
-                expect(stat).to.be.a(fs.Stats);
+            watcher.on('remove', function ( file, stat ) {
+                expect( file ).to.be.a('string');
+                expect( stat ).to.be.a( FSX.Stats );
 
-                expect(file).to.be(testFile);
-                expect(stat.isDirectory()).to.be(false);
+                expect( file ).to.be( testFile );
+                expect( stat.isDirectory() ).to.be( false );
 
-                if (++count >= 2) {
+                if ( ++count >= 2 ) {
                     watcher.removeAllListeners();
                     done();
                 }
             });
 
-            fs.unlink(testFile);
+            FSX.unlink( testFile );
 
         });
 
@@ -298,7 +314,7 @@ describe("Watch.IO", function () {
 
     after(function () {
 
-        fs.removeSync(basePath);
+        FSX.removeSync( basePath );
 
     });
 

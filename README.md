@@ -14,7 +14,7 @@ The `fs.watch()` API is not 100% consistent across platforms,
 and is unavailable and less reliable in some situations.
 
 Due to the behavior of `fs.watch()`, if you want to read the updated file content
-in the event listener, please delay a few milliseconds manully.
+in the event listener, please delay a few milliseconds manually.
 
 
 Installation
@@ -31,67 +31,67 @@ Quickstart
 The `WatchIO` object inherits `events.EventEmitter`, so use it in an event-style.
 
 ```javascript
-var WatchIO = require("watch.io"),
+var WatchIO = require('watch.io'),
     watcher = new WatchIO();
 
 // Watch a folder recursively
-watcher.watch("/path/to/folder");
+watcher.watch('/path/to/folder');
 
 // Listen on file creation
-watcher.on("create", function (file, stat) {
-    // expect(file).to.be.a("string");
+watcher.on('create', function (file, stat) {
+    // expect(file).to.be.a('string');
     // expect(stat).to.be.a(fs.Stats);
 });
 
 // Listen on file updating
-watcher.on("update", function (file, stat) {
-    // expect(file).to.be.a("string");
+watcher.on('update', function (file, stat) {
+    // expect(file).to.be.a('string');
     // expect(stat).to.be.a(fs.Stats);
 });
 
 // Listen on file removal
-watcher.on("remove", function (file, stat) {
-    // expect(file).to.be.a("string");
+watcher.on('remove', function (file, stat) {
+    // expect(file).to.be.a('string');
     // expect(stat).to.be.a(fs.Stats);
 });
 
 // Listen on file refreshment
 // The `refresh` event emits when the WatchIO scans a folder
 // which usually occur by calling the `.watch(path)` function
-watcher.on("refresh", function (file, stat) {
-    // expect(file).to.be.a("string");
+watcher.on('refresh', function (file, stat) {
+    // expect(file).to.be.a('string');
     // expect(stat).to.be.a(fs.Stats);
 });
 
 // Listen on whatever the file changes
-// the `type` parameter can be any one of: "create", "update", "remove", "refresh"
-watcher.on("change", function (type, file, stat) {
-    // expect(type).to.be.a("string");
-    // expect(file).to.be.a("string");
+// the `type` parameter can be any one of: 'create', 'update', 'remove', 'refresh'
+watcher.on('change', function (type, file, stat) {
+    // expect(type).to.be.a('string');
+    // expect(file).to.be.a('string');
     // expect(stat).to.be.a(fs.Stats);
 });
 
 // Listen on whatever the fs.FSWatcher throws an error
 // the `err` parameter is the same as the one from 'error' event of the fs.FSWatcher
-watcher.on("error", function (err, file) {
+watcher.on('error', function (err, file) {
     // expect(err).to.be.an(Error);
-    // expect(file).to.be.a("string");
+    // expect(file).to.be.a('string');
 });
 
 // Stop watching the folder/file
-watcher.close("/path/to/folder");
+watcher.close('/path/to/folder');
 ```
 
 Removing event listeners is the same as the way in `events.EventEmitter` of node.js.
 
 ```javascript
 // As:
-watcher.removeAllListeners("create");
-watcher.removeAllListeners("update");
-watcher.removeAllListeners("remove");
-watcher.removeAllListeners("refresh");
-watcher.removeAllListeners("change");
-watcher.removeAllListeners("error");
+watcher.removeAllListeners('create');
+watcher.removeAllListeners('update');
+watcher.removeAllListeners('remove');
+watcher.removeAllListeners('refresh');
+watcher.removeAllListeners('change');
+watcher.removeAllListeners('error');
 // Or:
 watcher.removeAllListeners();
 ```
@@ -103,7 +103,7 @@ Options
 Initialize WatchIO object with config:
 
 ```javascript
-var WatchIO = require("watch.io"),
+var WatchIO = require('watch.io'),
     watcher = new WatchIO({
         delay: 100
     });
@@ -121,11 +121,11 @@ Windows-platform Issues
 Due to the behavior of the underlying API,
 there have some issues still suck on Windows platform.
 
-* Removing folder will emit an 'EPERM' error.
+* Removing folders will emit an 'EPERM' error.
   No solutions so far.
 
-* Creating folder manually on Windows, sometimes emit an uncaught 'EBUSY' error.
-  This can be fixed by setting a delay milliseconds longer than 100ms for Watch.IO options.
+* Creating folders manually on Windows, sometimes emit an uncaught 'EBUSY' error.
+  This can be fixed by setting a delay milliseconds longer than 100ms in the Watch.IO options.
 
 We strongly recommend to use the Watch.IO in the Linux platform or other UNIX-like things.
 Or you can try

@@ -31,5 +31,5 @@
 
  *****************************************************************************/
 
-/* Export by importing Watch.IO module */
-module.exports = require("./lib/watch.io");
+/* Export by importing WatchIO module */
+module.exports = require('./lib/watch.io');

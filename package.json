@@ -19,7 +19,6 @@
         "fs-extra": "~0.8"
     },
     "scripts": {
-        "build": "make build",
         "test": "make test"
     },
     "repository": {

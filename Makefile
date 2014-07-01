@@ -1,15 +1,11 @@
-NAME = Watch.IO
-BASE_PATH = ./
+# watch.io
 
-all: clean build test
+BASE = .
 
-build:
-	node build
+all: test
 
 test:
 	mocha --reporter spec
-	jshint $(BASE_PATH)lib/
+	jshint $(BASE)/lib/
 
-clean:
-
-.PHONY: all test clean
+.PHONY: all test
