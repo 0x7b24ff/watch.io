@@ -32,50 +32,51 @@ The `WatchIO` object inherits `events.EventEmitter`, so use it in an event-style
 
 ```javascript
 var WatchIO = require('watch.io'),
-    watcher = new WatchIO();
+    watcher = new WatchIO()
+;
 
 // Watch a folder recursively
 watcher.watch('/path/to/folder');
 
 // Listen on file creation
-watcher.on('create', function (file, stat) {
-    // expect(file).to.be.a('string');
-    // expect(stat).to.be.a(fs.Stats);
+watcher.on('create', function ( file, stat ) {
+    // expect( file ).to.be.a('string');
+    // expect( stat ).to.be.a( fs.Stats );
 });
 
 // Listen on file updating
-watcher.on('update', function (file, stat) {
-    // expect(file).to.be.a('string');
-    // expect(stat).to.be.a(fs.Stats);
+watcher.on('update', function ( file, stat ) {
+    // expect( file ).to.be.a('string');
+    // expect( stat ).to.be.a( fs.Stats );
 });
 
 // Listen on file removal
-watcher.on('remove', function (file, stat) {
-    // expect(file).to.be.a('string');
-    // expect(stat).to.be.a(fs.Stats);
+watcher.on('remove', function ( file, stat ) {
+    // expect( file ).to.be.a('string');
+    // expect( stat ).to.be.a( fs.Stats );
 });
 
 // Listen on file refreshment
 // The `refresh` event emits when the WatchIO scans a folder
 // which usually occur by calling the `.watch(path)` function
-watcher.on('refresh', function (file, stat) {
-    // expect(file).to.be.a('string');
-    // expect(stat).to.be.a(fs.Stats);
+watcher.on('refresh', function ( file, stat ) {
+    // expect( file ).to.be.a('string');
+    // expect( stat ).to.be.a( fs.Stats );
 });
 
 // Listen on whatever the file changes
 // the `type` parameter can be any one of: 'create', 'update', 'remove', 'refresh'
-watcher.on('change', function (type, file, stat) {
-    // expect(type).to.be.a('string');
-    // expect(file).to.be.a('string');
-    // expect(stat).to.be.a(fs.Stats);
+watcher.on('change', function ( type, file, stat ) {
+    // expect( type ).to.be.a('string');
+    // expect( file ).to.be.a('string');
+    // expect( stat ).to.be.a( fs.Stats );
 });
 
 // Listen on whatever the fs.FSWatcher throws an error
-// the `err` parameter is the same as the one from 'error' event of the fs.FSWatcher
-watcher.on('error', function (err, file) {
-    // expect(err).to.be.an(Error);
-    // expect(file).to.be.a('string');
+// the `err` parameter is the same as the one from 'error' event of fs.FSWatcher
+watcher.on('error', function ( err, file ) {
+    // expect( err ).to.be.an( Error );
+    // expect( file ).to.be.a('string');
 });
 
 // Stop watching the folder/file
@@ -106,7 +107,8 @@ Initialize WatchIO object with config:
 var WatchIO = require('watch.io'),
     watcher = new WatchIO({
         delay: 100
-    });
+    })
+;
 ```
 
 Options:
