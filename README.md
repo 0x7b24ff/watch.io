@@ -1,7 +1,7 @@
 Watch.IO
 ========
 
-[![NPM version](https://badge.fury.io/js/watch.io.png)](https://badge.fury.io/js/watch.io)
+[![NPM version](https://img.shields.io/npm/v/watch.io.svg?style=flat-square)](https://www.npmjs.org/package/watch.io)
 [![Build status](https://secure.travis-ci.org/DJ-NotYet/watch.io.png?branch=master)](https://travis-ci.org/DJ-NotYet/watch.io)
 
 An event wrapper for fs.watch(), with support for recursive directories.
