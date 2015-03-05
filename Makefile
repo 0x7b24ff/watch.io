@@ -1,4 +1,4 @@
-# watch.io
+# Makefile
 
 BASE = .
 

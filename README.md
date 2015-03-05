@@ -1,5 +1,4 @@
-Watch.IO
-========
+# Watch.IO
 
 [![NPM version](https://img.shields.io/npm/v/watch.io.svg?style=flat-square)](https://www.npmjs.org/package/watch.io)
 [![Build status](https://secure.travis-ci.org/DJ-NotYet/watch.io.png?branch=master)](https://travis-ci.org/DJ-NotYet/watch.io)
@@ -7,8 +6,7 @@ Watch.IO
 An event wrapper for fs.watch(), with support for recursive directories.
 
 
-Caution
--------
+## Caution
 
 The `fs.watch()` API is not 100% consistent across platforms,
 and is unavailable and less reliable in some situations.
@@ -17,16 +15,14 @@ Due to the behavior of `fs.watch()`, if you want to read the updated file conten
 in the event listener, please delay a few milliseconds manually.
 
 
-Installation
-------------
+## Installation
 
 ```bash
 npm install watch.io
 ```
 
 
-Quickstart
-----------
+## Quickstart
 
 The `WatchIO` object inherits `events.EventEmitter`, so use it in an event-style.
 
@@ -98,8 +94,7 @@ watcher.removeAllListeners();
 ```
 
 
-Options
--------
+## Options
 
 Initialize WatchIO object with config:
 
@@ -117,8 +112,7 @@ Options:
 defaults to 100(ms), set to 0 to disable it.
 
 
-Windows-platform Issues
------------------------
+## Windows-platform Issues
 
 Due to the behavior of the underlying API,
 there have some issues still suck on Windows platform.
@@ -136,29 +130,26 @@ or
 [watch](https://www.npmjs.org/package/watch)
 
 
-License
--------
+## License
 
-(The Apache License 2.0)
+The MIT License (MIT)
 
-Copyright (c) 2014-2015, DJ-NotYet <dj.notyet@gmail.com>
+Copyright (c) 2009-2015, DJ-NotYet <dj.notyet@gmail.com>
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
