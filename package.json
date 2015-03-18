@@ -16,7 +16,7 @@
         "mocha": "*",
         "expect.js": "*",
         "jshint": "*",
-        "fs-extra": "~0.8"
+        "fs-extra": "*"
     },
     "scripts": {
         "test": "make test"
