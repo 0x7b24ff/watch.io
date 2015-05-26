@@ -7,10 +7,7 @@
     "version": "1.0.5",
     "author": "DJ-NotYet <dj.notyet@gmail.com>",
     "contributors" : [],
-    "license": {
-        "type": "MIT",
-        "url": "http://opensource.org/licenses/MIT"
-    },
+    "license": "MIT",
     "main": "index.js",
     "devDependencies": {
         "mocha": "*",
